@@ -6,11 +6,13 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:19:35 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/05 02:12:15 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/05 10:04:40 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
+#include <unistd.h>
+#include <fcntl.h>
 
 typedef struct s_parse_info {
 	int exit_exists;

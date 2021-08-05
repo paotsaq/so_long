@@ -6,7 +6,7 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:17:18 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/05 02:22:16 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/05 10:20:57 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	valid_line(t_parse_info *info, char *line, int first_or_last)
 				|| *line == 'E' && info->exit_exists++ > 1
 				|| *line == 'P' && info->player_exists++ > 1
 				|| *line == 'C' && info->collect_exists++ > 1)
-				return (-1)
+				return (-1);
 			else
 				line++;
 	}
@@ -55,33 +55,37 @@ static int	gets_map_fd(char *filename)
 	fd = open("test.txt", O_RDONLY);
 	if (fd == -1)
 		return (-1);
+	return (1);
+}
+
+static int	frees_list(t_map_lines **list, int free_content)
+{
+	free_list(*list, free_content);
+	if (free_content)
+		return (-1);
+	else
+		return (1);
 }
 
 int parser(char *filename)
 {
+	int 			fd;
 	char			*buffer;
 	t_parse_info	parse_info;
 	t_map_lines		**lines;
-	t_map_lines		*new_line;
 
-	gets_map_fd(filename);
+	fd = gets_map_fd(filename);
 	initialize_parse_variables(&parse_info, lines);
 	while (get_next_line(fd, &buffer) == 1)
 	{
 		if (*lines == NULL)
-			info->line_length == ft_strlen(buffer);
-		if (valid_line(buffer, *lines == NULL))
+			parse_info.line_length = ft_strlen(buffer);
+		if (valid_line(&parse_info, buffer, *lines == NULL))
 			add_back_line(lines, new_line(buffer));
 		else
-		{
-			free_list(lines, 1);
-			return (-1);
-		}
+			return (frees_list(lines, 1));
 	}
-	if (!valid_line(buffer, 1))
-	{
-		free_list(lines, 1);
-		return (-1);
-	}
+	if (!valid_line(&parse_info, buffer, 1))
+		return (frees_list(lines, 1));
 	return (1);
 }
