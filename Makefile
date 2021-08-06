@@ -3,23 +3,25 @@ HDRS		= includes
 CFLAGS 		= -Wall -Wextra -Werror -g
 AR 			= ar -rcsv
 NAME 		= so_long
-SRCS		= srcs/parser.c
+SRCS		= srcs/parser.c \
+			  srcs/linked_lists_utils.c \
+			  srcs/utils.c \
+			  srcs/main.c
 
-## $(NAME): $(OBJ)
-	## $(CC) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
-
-$(NAME):
-	$(CC) -I $(HDRS) $(SRCS) -o $(NAME)
-
-all: libft.a
+all: $(NAME)
 
 libft.a:
 	$(MAKE) libft.a -C ./libft
 	mv ./libft/libft.a ./libft.a
 
+$(NAME): libft.a
+	$(CC) $(CFLAGS) -L. -l ft -I $(HDRS) $(SRCS) -o $(NAME)
+
+
 clean:
-	make clean -C ./libft
-	rm -rf ft_*.o
+	rm $(NAME)
+
+re: clean all
 
 fclean: clean
 	make fclean -C ./libft

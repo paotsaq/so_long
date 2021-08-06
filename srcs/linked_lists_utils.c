@@ -6,7 +6,7 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:57:35 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/05 02:14:02 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/06 01:55:31 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_map_lines	*new_line(char *line)
 
 	res = malloc(sizeof(t_map_lines));
 	if (res == 0)
-		return (-1);
+		return (NULL);
 	res->line = line;
 	res->next = NULL;
 	return (res);
@@ -59,13 +59,13 @@ int	size_of_list(t_map_lines *lst)
 
 void	free_list(t_map_lines *lst, int free_content)
 {
-	t_map_lines next;
+	t_map_lines *next;
 
-	while(*lst)
+	while(lst)
 	{
 		next = lst->next;
 		if (free_content)
-			free(lst->content);
+			free(lst->line);
 		free(lst);
 		lst = next;
 	}
