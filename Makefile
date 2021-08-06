@@ -6,16 +6,24 @@ NAME 		= so_long
 SRCS		= srcs/parser.c \
 			  srcs/utils.c \
 			  srcs/main.c
+MLX_FLAGS	=	 -lmlx -framework OpenGL -framework AppKit
+LIBFT_FOLDER =		libft
+MINILIBX_FOLDER =	minilibx_mms_20200219
 
 all: $(NAME)
+
+compile_libraries:
+	$(MAKE) -C $(LIBFT_FOLDER)
+	$(MAKE) -C $(MINILIBX_FOLDER)
+	mv $(MINILIBX_FOLDER)/libmlx.dylib .
+	mv $(LIBFT_FOLDER)/libft.a .
+
+$(NAME): compile_libraries
+	$(CC) $(CFLAGS) $(MLX_FLAGS) -L. -lft -I $(HDRS) $(SRCS) -o $(NAME)
 
 libft.a:
 	$(MAKE) libft.a -C ./libft
 	mv ./libft/libft.a ./libft.a
-
-$(NAME): libft.a
-	$(CC) $(CFLAGS) -L. -l ft -I $(HDRS) $(SRCS) -o $(NAME)
-
 
 clean:
 	rm $(NAME)
