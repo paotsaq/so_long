@@ -6,27 +6,30 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:57:35 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/06 01:55:31 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/06 22:38:43 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-t_map_lines	*new_line(char *line)
+/* this could be a little more abstract;
+ * here's to hoping I won't need any more structs */
+t_coll_lst	*new_collectible(int x, int y)
 {
-	t_map_lines	*res;
+	t_coll_lst	*res;
 
-	res = malloc(sizeof(t_map_lines));
+	res = malloc(sizeof(t_coll_lst));
 	if (res == 0)
 		return (NULL);
-	res->line = line;
+	res->x = x;
+	res->y = y;
 	res->next = NULL;
 	return (res);
 }
 
-int		add_back_line(t_map_lines **lst, t_map_lines *new)
+int		add_back_collectible(t_coll_lst **lst, t_coll_lst *new)
 {
-	t_map_lines	*last;
+	t_coll_lst	*last;
 
 	if (lst && new)
 	{
@@ -44,7 +47,7 @@ int		add_back_line(t_map_lines **lst, t_map_lines *new)
 	return (-1);
 }
 
-int	size_of_list(t_map_lines *lst)
+int		size_of_list(t_coll_lst *lst)
 {
 	int	i;
 
@@ -52,20 +55,18 @@ int	size_of_list(t_map_lines *lst)
 	while (lst)
 	{
 		i++;
-		lst = (*lst).next;
+		lst = lst->next;
 	}
 	return (i);
 }
 
-void	free_list(t_map_lines *lst, int free_content)
+void	free_list(t_coll_lst *lst)
 {
-	t_map_lines *next;
+	t_coll_lst *next;
 
 	while(lst)
 	{
 		next = lst->next;
-		if (free_content)
-			free(lst->line);
 		free(lst);
 		lst = next;
 	}

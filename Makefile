@@ -6,6 +6,7 @@ NAME 		= so_long
 SRCS		= srcs/parser.c \
 			  srcs/utils.c \
 			  srcs/main.c \
+			  srcs/linked_lists_utils.c \
 			  srcs/window.c
 
 MLX_FLAGS	=	 -lmlx -framework OpenGL -framework AppKit

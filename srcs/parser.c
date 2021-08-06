@@ -6,7 +6,7 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:17:18 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/06 11:46:55 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/06 22:57:02 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ static int	valid_line(t_parse_info *info, char *line, int first_or_last)
 	return (1);
 }
 
-static int	build_map_struct_matrix(t_map *map_struct, char *line)
+/* line count can be used in here? */
+static int	allocate_map_matrix(t_map *map_struct, char *line)
 {
 	int		count;
 	int		i;
@@ -78,26 +79,57 @@ int	free_map_and_make_error(t_map *map_struct)
 	return (-1);
 }
 
+/* need a fine y position */
+int	get_objects_position(t_map *map_struct, t_parse_info *parse_info, char *line, int y)
+{
+	int	x;
+
+	x = -1;
+	while(++x < parse_info->line_length)
+	{
+		if (line[x] == 'P')
+		{
+			map_struct->player_x = x;
+			map_struct->player_y = y;
+		}
+		else if (line[x] == 'P')
+		{
+			map_struct->exit_x = x;
+			map_struct->exit_y = y;
+		}
+		else if (add_back_collectible(new_collectible(x, y)) == -1)
+			return (-1);
+	}
+	return (1);
+}
+
 /* gets the file descriptor for the map reading,
- * parses the content and validates the input.
- * if successful, map gets updated as a side-effect,
- * otherwise, (-1) is returned
- * the buffer is freed afterwards
- * because GNL will still alocate a null string.*/
+ * parses the content, and validates the input.
+ * if successful,
+ *		map gets updated as a side-effect,
+ * otherwise,
+ *		(-1) is returned
+ * the buffer is freed afterwards,
+ * because GNL will still alocate a null string. */
 int parser(char *filename, t_map *map_struct)
 {
 	int 			fd;
 	char			*buffer;
 	t_parse_info	parse_info;
+	int				line_number;
 
+	line_number = -1;
 	fd = gets_map_fd(filename);
 	initialize_parse_variables(&parse_info);
-	while (get_next_line(fd, &buffer) == 1)
+	while (++i && get_next_line(fd, &buffer) == 1)
 	{
 		if (map_struct->lines_amount == 0)
 			parse_info.line_length = ft_strlen(buffer);
 		if (valid_line(&parse_info, buffer, map_struct->lines_amount == 0))
-			build_map_struct_matrix(map_struct, buffer);
+		{
+			allocate_map_matrix(map_struct, buffer);
+			get_objects_position(map_struct, buffer, line_number);
+		}
 		else
 			return (free_map_and_make_error(map_struct));
 	}
