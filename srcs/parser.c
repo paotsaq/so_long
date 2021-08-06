@@ -6,7 +6,7 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:17:18 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/06 08:49:28 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/06 11:46:55 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,9 @@ int	free_map_and_make_error(t_map *map_struct)
 /* gets the file descriptor for the map reading,
  * parses the content and validates the input.
  * if successful, map gets updated as a side-effect,
- * otherwise, (-1) is returned */
+ * otherwise, (-1) is returned
+ * the buffer is freed afterwards
+ * because GNL will still alocate a null string.*/
 int parser(char *filename, t_map *map_struct)
 {
 	int 			fd;
@@ -101,5 +103,6 @@ int parser(char *filename, t_map *map_struct)
 	}
 	if (!valid_line(&parse_info, buffer, 1))
 		return (free_map_and_make_error(map_struct));
+	free(buffer);
 	return (1);
 }
