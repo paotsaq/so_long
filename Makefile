@@ -5,7 +5,9 @@ AR 			= ar -rcsv
 NAME 		= so_long
 SRCS		= srcs/parser.c \
 			  srcs/utils.c \
-			  srcs/main.c
+			  srcs/main.c \
+			  srcs/window.c
+
 MLX_FLAGS	=	 -lmlx -framework OpenGL -framework AppKit
 LIBFT_FOLDER =		libft
 MINILIBX_FOLDER =	minilibx_mms_20200219
