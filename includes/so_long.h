@@ -6,7 +6,7 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:19:35 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/06 02:59:49 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/06 08:48:18 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,6 @@
 
 # define ERROR_MSG "Error\n"
 
-typedef struct s_map {
-
-}
-
 typedef struct s_parse_info {
 	int exit_exists;
 	int collect_exists;
@@ -27,19 +23,14 @@ typedef struct s_parse_info {
 	int	line_length;
 }				t_parse_info;
 
-typedef struct s_map_lines {
-	char				*line;
-	struct s_map_lines	*next;
-}				t_map_lines;
-
-/* linked_lists */
-t_map_lines	*new_line(char *line);
-void		free_list(t_map_lines *lst, int free_content);
-int			size_of_list(t_map_lines *lst);
-int			add_back_line(t_map_lines **lst, t_map_lines *new);
+typedef struct s_map {
+	char				**map;
+	int					lines_amount;
+}				t_map;
 
 /* utils */
-int			gets_map_fd(char *filename);
+int	gets_map_fd(char *filename);
+int	free_map_and_make_error(t_map *map_struct);
 
 /* parser */
-int parser(char *filename, t_map_lines *lines);
+int parser(char *filename, t_map *map_struct);

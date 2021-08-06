@@ -4,7 +4,6 @@ CFLAGS 		= -Wall -Wextra -Werror -g
 AR 			= ar -rcsv
 NAME 		= so_long
 SRCS		= srcs/parser.c \
-			  srcs/linked_lists_utils.c \
 			  srcs/utils.c \
 			  srcs/main.c
 
