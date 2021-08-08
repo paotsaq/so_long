@@ -6,7 +6,7 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:19:35 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/06 23:00:33 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/07 19:18:59 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,14 @@
 #include "../minilibx_mms_20200219/mlx.h"
 
 # define ERROR_MSG "Error\n"
+
+typedef struct	s_image {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_image;
 
 typedef struct s_parse_info {
 	int exit_exists;
@@ -48,3 +56,6 @@ t_coll_lst	*new_collectible(int x, int y);
 
 /* parser */
 int parser(char *filename, t_map *map_struct);
+
+/* window */
+int	window(void);
