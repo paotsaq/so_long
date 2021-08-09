@@ -6,7 +6,7 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:19:35 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/07 19:18:59 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/09 14:02:48 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct	s_image {
 	int		endian;
 }				t_image;
 
-typedef struct s_parse_info {
+typedef struct	s_parse_info {
 	int exit_exists;
 	int collect_exists;
 	int player_exists;
@@ -38,9 +38,12 @@ typedef struct	s_coll_lst {
 	struct s_coll_lst	*next;
 }				t_coll_lst;
 
-typedef struct s_map {
+/* map is a matrix; */
+typedef struct	s_map {
 	char				**map;
 	int					lines_amount;
+	int					max_x;
+	int					max_y;
 	int					player_x;
 	int					player_y;
 	int					exit_x;

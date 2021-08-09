@@ -6,7 +6,7 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:17:18 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/08 22:09:03 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/09 13:38:52 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,10 @@ int parser(char *filename, t_map *map_struct)
 	while (get_next_line(fd, &buffer) == 1)
 	{
 		if (map_struct->lines_amount == 0)
+		{
 			parse_info.line_length = ft_strlen(buffer);
+			map_struct->max_x = ft_strlen(buffer) - 1;
+		}
 		if (valid_line(&parse_info, buffer, map_struct->lines_amount == 0))
 		{
 			allocate_map_matrix(map_struct, buffer);
