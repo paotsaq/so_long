@@ -6,27 +6,20 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 18:00:45 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/09 14:06:34 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/09 20:33:18 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
-}
 
 int	window(void)
 {
-	void	*mlx;
+	void	*mlx_instance;
 	void	*mlx_win;
 	t_image	data;
 
-	mlx = mlx_init();
+	mlx_instance = mlx_instance_init();
 	mlx_win = mlx_new_window(mlx, 800, 300, "Hello world!");
 	data.img = mlx_new_image(mlx, 800, 300);
 

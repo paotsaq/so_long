@@ -6,7 +6,7 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:17:18 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/09 13:38:52 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/09 20:15:45 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,18 @@ static int	allocate_map_matrix(t_map *map_struct, char *line)
 	int		i;
 	char	**lines;
 
-	count = map_struct->lines_amount + 1;
+	count = map_struct->max_y + 1;
 	lines = ft_calloc(count, sizeof(char **));
 	if (!lines)
 		return (-1);
 	i = -1;
-	while (++i < map_struct->lines_amount)
+	while (++i < map_struct->max_y)
 		lines[i] = map_struct->map[i];
 	lines[i] = line;
 	if (map_struct->map)
 		free(map_struct->map);
 	map_struct->map = lines;
-	map_struct->lines_amount++;
+	map_struct->max_y++;
 	return (1);
 }
 
@@ -73,7 +73,7 @@ int	free_map_and_make_error(t_map *map_struct)
 {
 	int i = -1;
 
-	while (++i < map_struct->lines_amount)
+	while (++i < map_struct->max_y)
 		free(map_struct->map[i]);
 	free(map_struct->map);
 	return (-1);
@@ -124,12 +124,9 @@ int parser(char *filename, t_map *map_struct)
 	initialize_parse_variables(&parse_info);
 	while (get_next_line(fd, &buffer) == 1)
 	{
-		if (map_struct->lines_amount == 0)
-		{
-			parse_info.line_length = ft_strlen(buffer);
-			map_struct->max_x = ft_strlen(buffer) - 1;
-		}
-		if (valid_line(&parse_info, buffer, map_struct->lines_amount == 0))
+		if (map_struct->max_y == 0)
+			map_struct->max_x = ft_strlen(buffer);
+		if (valid_line(&parse_info, buffer, map_struct->max_y == 0))
 		{
 			allocate_map_matrix(map_struct, buffer);
 			get_objects_position(map_struct, &parse_info, buffer, line_number);

@@ -6,7 +6,7 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:19:35 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/09 14:02:48 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/09 20:28:16 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ typedef struct	s_image {
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		window_height;
+	int		window_width;
 }				t_image;
 
 typedef struct	s_parse_info {
@@ -41,7 +43,6 @@ typedef struct	s_coll_lst {
 /* map is a matrix; */
 typedef struct	s_map {
 	char				**map;
-	int					lines_amount;
 	int					max_x;
 	int					max_y;
 	int					player_x;
