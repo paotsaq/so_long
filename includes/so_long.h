@@ -6,7 +6,7 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:19:35 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/09 20:28:16 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/10 08:19:06 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 #include "../minilibx_mms_20200219/mlx.h"
 
 # define ERROR_MSG "Error\n"
+
+typedef struct s_game {
+
+}
 
 typedef struct	s_image {
 	void	*img;
