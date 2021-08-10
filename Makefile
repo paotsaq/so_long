@@ -7,7 +7,7 @@ SRCS		= srcs/parser.c \
 			  srcs/utils.c \
 			  srcs/main.c \
 			  srcs/window.c \
-			  srcs/linked_lists_utils.c
+			  srcs/textures.c 
 
 MLX_FLAGS	=	 -lmlx -framework OpenGL -framework AppKit
 LIBFT_FOLDER =		libft

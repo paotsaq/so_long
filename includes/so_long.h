@@ -6,7 +6,7 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:19:35 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/10 08:19:06 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/10 18:26:51 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@
 #include "../minilibx_mms_20200219/mlx.h"
 
 # define ERROR_MSG "Error\n"
-
-typedef struct s_game {
-
-}
+# define ASSET_HEIGHT 100
+# define ASSET_WIDTH 100
 
 typedef struct	s_image {
 	void	*img;
@@ -32,38 +30,39 @@ typedef struct	s_image {
 }				t_image;
 
 typedef struct	s_parse_info {
-	int exit_exists;
-	int collect_exists;
-	int player_exists;
-	int	line_length;
+	int 	exit_exists;
+	int 	collect_exists;
+	int 	player_exists;
 }				t_parse_info;
 
-typedef struct	s_coll_lst {
-	int					x;
-	int					y;
-	struct s_coll_lst	*next;
-}				t_coll_lst;
-
-/* map is a matrix; */
 typedef struct	s_map {
-	char				**map;
-	int					max_x;
-	int					max_y;
-	int					player_x;
-	int					player_y;
-	int					exit_x;
-	int					exit_y;
-	t_coll_lst			**c_pos;
+	char		**map;
+	int			max_x;
+	int			max_y;
+	int			player_x;
+	int			player_y;
 }				t_map;
+
+typedef struct 	s_game {
+	t_map 		map;	
+	void		*mlx_instance;
+	void		*mlx_window;
+	t_image		*image_to_write;
+	int			**asset_floor;
+	int			**asset_wall;
+	int			**asset_player;
+	int			**asset_coll;
+	int			**asset_exit;
+}				t_game;
 
 /* utils */
 int	gets_map_fd(char *filename);
 int	free_map_and_make_error(t_map *map_struct);
-int	add_back_collectible(t_coll_lst **lst, t_coll_lst *new);
-t_coll_lst	*new_collectible(int x, int y);
+void	get_player_position(t_map *map_struct, char *line);
 
 /* parser */
-int parser(char *filename, t_map *map_struct);
+int parser(t_game *game, char *filename, t_map *map_struct);
+void	load_texture(t_game *game, int ***pointer, char *path_to_file);
 
 /* window */
-int	window(void);
+int	window(t_game *game);

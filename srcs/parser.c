@@ -6,7 +6,7 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:17:18 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/09 20:15:45 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/10 16:36:10 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static void	initialize_parse_variables(t_parse_info *info)
 	info->player_exists = 0;
 }
 
-static int	valid_line(t_parse_info *info, char *line, int first_or_last)
+static int	valid_line(t_game *game, t_parse_info *info, char *line, int first_or_last)
 {
-	if ((int)ft_strlen(line) != info->line_length)
+	if ((int)ft_strlen(line) != game->map.max_x)
 		return (-1);
 	if (first_or_last)
 	{
@@ -33,7 +33,7 @@ static int	valid_line(t_parse_info *info, char *line, int first_or_last)
 	}
 	else
 	{
-		if (line[0] != '1' || line[info->line_length - 1] != '1')
+		if (line[0] != '1' || line[game->map.max_x - 1] != '1')
 			return (-1);
 		while (*line)
 			if (!ft_strchr("01ECP", *line)
@@ -79,29 +79,22 @@ int	free_map_and_make_error(t_map *map_struct)
 	return (-1);
 }
 
-/* need a fine y position */
-int	get_objects_position(t_map *map_struct, t_parse_info *parse_info, char *line, int y)
+void	get_player_position(t_map *map_struct, char *line)
 {
 	int	x;
+	int	y;
 
-	x = -1;
-	while(++x < parse_info->line_length)
+	y = -1;
+	while(++y < map_struct->max_y)
 	{
-		if (line[x] == 'P')
-		{
-			map_struct->player_x = x;
-			map_struct->player_y = y;
-		}
-		else if (line[x] == 'E')
-		{
-			map_struct->exit_x = x;
-			map_struct->exit_y = y;
-		}
-		else if (line[x] == 'C' &&
-				add_back_collectible(map_struct->c_pos, new_collectible(x, y)) == -1)
-			return (-1);
+		x = -1;
+		while(++x < map_struct->max_x)
+			if (line[x] == 'P')
+			{
+				map_struct->player_x = x;
+				map_struct->player_y = y;
+			}
 	}
-	return (1);
 }
 
 /* gets the file descriptor for the map reading,
@@ -112,7 +105,7 @@ int	get_objects_position(t_map *map_struct, t_parse_info *parse_info, char *line
  *		(-1) is returned
  * the buffer is freed afterwards,
  * because GNL will still alocate a null string. */
-int parser(char *filename, t_map *map_struct)
+int parser(t_game *game, char *filename, t_map *map_struct)
 {
 	int 			fd;
 	char			*buffer;
@@ -126,17 +119,14 @@ int parser(char *filename, t_map *map_struct)
 	{
 		if (map_struct->max_y == 0)
 			map_struct->max_x = ft_strlen(buffer);
-		if (valid_line(&parse_info, buffer, map_struct->max_y == 0))
-		{
-			allocate_map_matrix(map_struct, buffer);
-			get_objects_position(map_struct, &parse_info, buffer, line_number);
-		}
+		if (valid_line(game, &parse_info, buffer, game->map.max_y == 0))
+			allocate_map_matrix(&game->map, buffer);
 		else
-			return (free_map_and_make_error(map_struct));
+			return (free_map_and_make_error(&game->map));
 		line_number++;
 	}
-	if (!valid_line(&parse_info, buffer, 1))
-		return (free_map_and_make_error(map_struct));
+	if (!valid_line(game, &parse_info, buffer, 1))
+		return (free_map_and_make_error(&game->map));
 	free(buffer);
 	return (1);
 }
