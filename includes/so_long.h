@@ -6,7 +6,7 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:19:35 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/11 02:07:51 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/11 08:36:31 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,14 @@
 #include <fcntl.h>
 #include "../minilibx_mms_20200219/mlx.h"
 
-# define ERROR_MSG "Error\n"
-# define ASSET_HEIGHT 100
-# define ASSET_WIDTH 100
+# define ERROR_MSG		"Error\n"
+# define ASSET_HEIGHT	100
+# define ASSET_WIDTH	100
+# define ESC			53
+# define MOVE_UP 		13
+# define MOVE_DOWN 		1
+# define MOVE_RIGHT 	2
+# define MOVE_LEFT		0
 
 typedef struct s_map_coords {
 	int x;
@@ -52,6 +57,7 @@ typedef struct 	s_game {
 	t_map 		map;
 	void		*mlx_instance;
 	void		*mlx_window;
+	int			key_count;
 	t_image		*image_to_write;
 	t_image		i_asset_floor;
 	t_image		i_asset_wall;
