@@ -6,7 +6,7 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:19:35 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/10 18:26:51 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/11 02:07:51 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,19 @@
 # define ASSET_HEIGHT 100
 # define ASSET_WIDTH 100
 
+typedef struct s_map_coords {
+	int x;
+	int y;
+}				t_map_coords;
+
 typedef struct	s_image {
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-	int		window_height;
-	int		window_width;
+	int		img_height;
+	int		img_width;
 }				t_image;
 
 typedef struct	s_parse_info {
@@ -44,25 +49,27 @@ typedef struct	s_map {
 }				t_map;
 
 typedef struct 	s_game {
-	t_map 		map;	
+	t_map 		map;
 	void		*mlx_instance;
 	void		*mlx_window;
 	t_image		*image_to_write;
-	int			**asset_floor;
-	int			**asset_wall;
-	int			**asset_player;
-	int			**asset_coll;
-	int			**asset_exit;
+	t_image		i_asset_floor;
+	t_image		i_asset_wall;
+	t_image		i_asset_player;
+	t_image		i_asset_coll;
+	t_image		i_asset_exit;
 }				t_game;
 
 /* utils */
 int	gets_map_fd(char *filename);
 int	free_map_and_make_error(t_map *map_struct);
-void	get_player_position(t_map *map_struct, char *line);
+void get_player_position(t_map *map_struct, char *line);
 
 /* parser */
 int parser(t_game *game, char *filename, t_map *map_struct);
-void	load_texture(t_game *game, int ***pointer, char *path_to_file);
 
 /* window */
 int	window(t_game *game);
+
+/* texture loading */
+int	load_textures(t_game *game);

@@ -6,11 +6,11 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:17:18 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/10 16:36:10 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/10 20:31:10 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/parser.h"
+#include "../includes/so_long.h"
 
 static void	initialize_parse_variables(t_parse_info *info)
 {
