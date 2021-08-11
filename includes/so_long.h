@@ -6,7 +6,7 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:19:35 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/11 21:28:21 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/11 22:15:14 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,5 @@ int	load_textures(t_game *game);
 void	fill_first_map(t_game *game);
 
 /* hooks */
-int on_key_press(int key, t_game *game);
-void	move_player(t_game *game, int key);
-
-
+int		on_key_press(int key, t_game *game);
+void	make_a_move(t_game *game, int key);
