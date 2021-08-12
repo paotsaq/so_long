@@ -6,7 +6,7 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 08:09:48 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/12 07:44:32 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/12 13:11:21 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,19 @@
 
 void	exit_hook(t_game *game)
 {
+	int i;
+
+	i = -1;
+	while (++i < game->max_y)
+		free(game->map[i]);
 	free(game->map);
-	exit(1);
+	exit(0);
 }
 
+
+
 /* introduces new map letter, 'N', that stands for player being over the exit,
- * but still now allowed to make the game finish */
+ * bi_asset_exit;ut still now allowed to make the game finish */
 void	update_map_positions(t_game *game, int new_x, int new_y)
 {
 	if (game->map[game->player_y][game->player_x] == 'N')
@@ -32,12 +39,6 @@ void	update_map_positions(t_game *game, int new_x, int new_y)
 		game->map[new_y][new_x] = 'P';
 	game->player_y = new_y;
 	game->player_x = new_x;
-}
-
-void	render_asset(t_game *game, t_image *asset, t_map_coords *coords)
-{
-	mlx_put_image_to_window(game->mlx_instance, game->mlx_window,
-		asset->img, coords->x, coords->y);
 }
 
 /* after the first render of the whole map, only two additional renders
@@ -82,7 +83,7 @@ void	update_provisional_positions(t_game *game, int key)
 	}
 }
 
-int on_key_press(int key, t_game *game)
+int	on_key_press(int key, t_game *game)
 {
 	int x;
 	int y;

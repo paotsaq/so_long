@@ -6,7 +6,7 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:19:35 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/12 07:35:42 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/12 07:50:34 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ void	get_map_coordinates(int x, int y, t_map_coords *coords);
 int parser(t_game *game, char *filename);
 
 /* window */
-int	window(t_game *game);
+int	makes_window(t_game *game);
+void	render_asset(t_game *game, t_image *asset, t_map_coords *coords);
 
 /* texture loading */
 int	load_textures(t_game *game);

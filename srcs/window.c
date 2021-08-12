@@ -6,11 +6,17 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 18:00:45 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/11 21:08:00 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/12 07:50:21 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	render_asset(t_game *game, t_image *asset, t_map_coords *coords)
+{
+	mlx_put_image_to_window(game->mlx_instance, game->mlx_window,
+		asset->img, coords->x, coords->y);
+}
 
 void	get_map_coordinates(int x, int y, t_map_coords *coords)
 {
@@ -42,8 +48,7 @@ void	fill_first_map(t_game *game)
 				asset = &game->i_asset_player;
 			else
 				asset = &game->i_asset_exit;
-			mlx_put_image_to_window(game->mlx_instance, game->mlx_window,
-				asset->img, coords.x, coords.y);
+			render_asset(game, asset, &coords);
 		}
 	}
 }
@@ -60,13 +65,11 @@ void	initialize_window_and_instance(t_game *game)
 			window_width, window_height, "Hello world!");
 }
 
-int	window(t_game *game)
+int	makes_window(t_game *game)
 {
 	initialize_window_and_instance(game);
 	if (load_textures(game) == -1)
 		write(STDOUT_FILENO, ERROR_MSG, ft_strlen(ERROR_MSG));
 	fill_first_map(game);
-	mlx_key_hook(game->mlx_window, on_key_press, game);
-	mlx_loop(game->mlx_instance);
 	return (1);
 }
