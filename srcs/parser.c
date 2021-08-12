@@ -6,7 +6,7 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:17:18 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/12 12:57:19 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/12 15:57:56 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ int	free_map_and_make_error(t_game *game)
 	return (-1);
 }
 
-
 /* gets the file descriptor for the map reading,
  * parses the content, and validates the input.
  * if successful,
@@ -107,7 +106,7 @@ int parser(t_game *game, char *filename)
 	}
 	if (!valid_line(game, &parse_info, buffer, 1))
 		return (free_map_and_make_error(game));
-	get_player_position(game);
+	update_map_information(game, 1);
 	free(buffer);
 	return (1);
 }

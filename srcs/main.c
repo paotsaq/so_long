@@ -6,7 +6,7 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:17:18 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/12 12:57:46 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/12 16:09:09 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	main()
 
 	game.map = NULL;
 	game.max_y = 0;
+	game.move_count = 0;
+	game.allow_movement = 1;
 
 	if (parser(&game, "map.ber") == -1)
 	{

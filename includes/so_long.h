@@ -6,7 +6,7 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:19:35 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/12 07:50:34 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/12 16:08:51 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct 	s_game {
 	int			player_y;
 	int			new_x;
 	int			new_y;
+	int			allow_movement;
 	t_image		i_asset_floor;
 	t_image		i_asset_wall;
 	t_image		i_asset_player;
@@ -70,7 +71,7 @@ typedef struct 	s_game {
 /* utils */
 int	gets_map_fd(char *filename);
 int	free_map_and_make_error(t_game *game);
-void get_player_position(t_game *game);
+void update_map_information(t_game *game, int collectible_count);
 void update_collectible_and_move_count(t_game *game, int x, int y);
 int	legal_move(t_game *game, int x, int y);
 int	game_finishes(t_game *game, int x, int y);

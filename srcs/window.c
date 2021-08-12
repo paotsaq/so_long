@@ -6,7 +6,7 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 18:00:45 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/12 07:50:21 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/12 15:54:27 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,17 @@ void	initialize_window_and_instance(t_game *game)
 	window_height = game->max_y * ASSET_HEIGHT;
 	game->mlx_instance = mlx_init();
 	game->mlx_window = mlx_new_window(game->mlx_instance,
-			window_width, window_height, "Hello world!");
+			window_width, window_height, "So Long 🐬");
 }
 
 int	makes_window(t_game *game)
 {
 	initialize_window_and_instance(game);
 	if (load_textures(game) == -1)
+	{
 		write(STDOUT_FILENO, ERROR_MSG, ft_strlen(ERROR_MSG));
+		return (-1);
+	}
 	fill_first_map(game);
 	return (1);
 }

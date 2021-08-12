@@ -6,7 +6,7 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 08:09:48 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/12 13:11:21 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/12 16:13:49 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,15 @@ void	exit_hook(t_game *game)
 	while (++i < game->max_y)
 		free(game->map[i]);
 	free(game->map);
+	mlx_destroy_image(game->mlx_instance, game->i_asset_floor.img);
+	mlx_destroy_image(game->mlx_instance, game->i_asset_exit.img);
+	mlx_destroy_image(game->mlx_instance, game->i_asset_coll.img);
+	mlx_destroy_image(game->mlx_instance, game->i_asset_wall.img);
+	mlx_destroy_image(game->mlx_instance, game->i_asset_player.img);
+	mlx_destroy_image(game->mlx_instance, game->i_asset_player_over_exit.img);
+	mlx_destroy_window(game->mlx_instance, game->mlx_window);
 	exit(0);
 }
-
-
 
 /* introduces new map letter, 'N', that stands for player being over the exit,
  * bi_asset_exit;ut still now allowed to make the game finish */
@@ -92,16 +97,19 @@ int	on_key_press(int key, t_game *game)
 	y = game->player_y;
 	if (key == ESC)
 		exit_hook(game);
-	else if (key == MOVE_UP || key == MOVE_DOWN ||
-			key == MOVE_LEFT || key == MOVE_RIGHT)
+	else if (game->allow_movement && (key == MOVE_UP || key == MOVE_DOWN ||
+			key == MOVE_LEFT || key == MOVE_RIGHT))
 	{
 		update_provisional_positions(game, key);
 		if (legal_move(game, game->new_x, game->new_y))
 		{
 			update_collectible_and_move_count(game, game->new_x, game->new_y);
-			game_finishes(game, game->new_x, game->new_y);
 			refresh_two_tiles(game, game->new_x, game->new_y);
 			update_map_positions(game, game->new_x, game->new_y);
+			printf("%d\n", game->collectible_count);
+			printf("%c\n", game->map[game->player_y][game->player_x]);
+			if (game_finishes(game, game->player_x, game->player_y))
+				game->allow_movement = 0;
 		}
 	}
 	return (0);
