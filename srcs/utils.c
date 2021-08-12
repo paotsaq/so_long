@@ -6,20 +6,19 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 02:54:06 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/12 16:14:41 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/12 20:23:45 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-int	gets_map_fd(char *filename)
+void	free_map(t_game *game)
 {
-	int fd;
+	int i = -1;
 
-	fd = open(filename, O_RDONLY);
-	if (fd == -1)
-		return (-1);
-	return (fd);
+	while (++i < game->max_y)
+		free(game->map[i]);
+	free(game->map);
 }
 
 void	update_map_information(t_game *game, int count_collectibles)
@@ -52,7 +51,7 @@ int		game_finishes(t_game *game, int x, int y)
 		return (0);
 }
 
-int	legal_move(t_game *game, int x, int y)
+int		legal_move(t_game *game, int x, int y)
 {
 	return (x < game->max_x && y < game->max_y
 			&& game->map[y][x] != '1');
@@ -61,9 +60,6 @@ int	legal_move(t_game *game, int x, int y)
 void	update_collectible_and_move_count(t_game *game, int x, int y)
 {
 	if (game->map[y][x] == 'C')
-	{
-		printf("found a collectible!\n");
 		game->collectible_count--;
-	}
 	game->move_count++;
 }

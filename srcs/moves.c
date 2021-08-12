@@ -6,7 +6,7 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 08:09:48 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/12 18:00:00 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/12 20:22:51 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,8 @@ int	on_key_press(int key, t_game *game)
 			update_collectible_and_move_count(game, game->new_x, game->new_y);
 			refresh_two_tiles(game, game->new_x, game->new_y);
 			update_map_positions(game, game->new_x, game->new_y);
-			printf("%d\n", game->collectible_count);
-			printf("%c\n", game->map[game->player_y][game->player_x]);
+			ft_putnbr_fd(game->move_count, 1);
+			ft_putchar_fd('\n', 1);
 			if (game_finishes(game, game->player_x, game->player_y))
 				game->allow_movement = 0;
 		}

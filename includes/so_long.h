@@ -6,7 +6,7 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:19:35 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/12 18:00:11 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/12 19:38:00 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,13 @@
 # define MOVE_DOWN 		1
 # define MOVE_RIGHT 	2
 # define MOVE_LEFT		0
+
+# define WRONG_ARGC		"Wrong number of arguments.\n"
+# define NOT_RECTANGLE	"Map is not a rectangle.\n"
+# define BORDER_NOT_1	"One of the borders is illegal.\n"
+# define MSSNG_EPC		"Map is missing player, exit, or collectible.\n"
+# define MALLOC_FAIL	"Allocation failed.\n"
+# define FILE_R_FAIL	"File reading failed.\n"
 
 typedef struct s_map_coords {
 	int x;
@@ -69,13 +76,16 @@ typedef struct 	s_game {
 }				t_game;
 
 /* utils */
-int	gets_map_fd(char *filename);
-int	free_map_and_make_error(t_game *game);
+int	gets_map_fd(t_game *game, char *filename);
 void update_map_information(t_game *game, int collectible_count);
 void update_collectible_and_move_count(t_game *game, int x, int y);
 int	legal_move(t_game *game, int x, int y);
 int	game_finishes(t_game *game, int x, int y);
 void	get_map_coordinates(int x, int y, t_map_coords *coords);
+
+/* frees && memory_management */
+int	error_and_free(t_game *game, char *message, int layers);
+void	free_map(t_game *game);
 
 /* parser */
 int parser(t_game *game, char *filename);
