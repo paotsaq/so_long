@@ -6,7 +6,7 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:17:18 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/12 15:57:56 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/12 17:08:31 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ static int	valid_line(t_game *game, t_parse_info *info, char *line, int first_or
 			return (-1);
 		while (*line)
 			if (!ft_strchr("01ECP", *line)
-				|| (*line == 'E' && info->exit_exists++ > 1)
-				|| (*line == 'P' && info->player_exists++ > 1)
-				|| (*line == 'C' && info->collect_exists++ > 1))
+				|| (*line == 'E' && info->exit_exists++ < 0)
+				|| (*line == 'P' && info->player_exists++ < 0)
+				|| (*line == 'C' && info->collect_exists++ < 0))
 				return (-1);
 			else
 				line++;
@@ -99,12 +99,15 @@ int parser(t_game *game, char *filename)
 	{
 		if (game->max_y == 0)
 			game->max_x = ft_strlen(buffer);
-		if (valid_line(game, &parse_info, buffer, game->max_y == 0))
+		if (valid_line(game, &parse_info, buffer, game->max_y == 0) == 1)
 			allocate_map_matrix(game, buffer);
 		else
 			return (free_map_and_make_error(game));
 	}
-	if (!valid_line(game, &parse_info, buffer, 1))
+	if (!valid_line(game, &parse_info, buffer, 1) ||
+		parse_info.exit_exists == 0 ||
+		parse_info.player_exists != 1 ||
+		parse_info.collect_exists == 0)
 		return (free_map_and_make_error(game));
 	update_map_information(game, 1);
 	free(buffer);
