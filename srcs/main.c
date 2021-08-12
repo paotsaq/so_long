@@ -6,7 +6,7 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:17:18 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/12 16:09:09 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/12 17:50:13 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	main()
 	}
 	makes_window(&game);
 	mlx_key_hook(game.mlx_window, on_key_press, &game);
+	mlx_hook(game.mlx_window, DESTROY_NOTIFY, 1L, exit_hook, &game);
 	mlx_loop(game.mlx_instance);
 	return (0);
 }

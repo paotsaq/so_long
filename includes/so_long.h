@@ -6,7 +6,7 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:19:35 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/12 16:08:51 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/12 18:00:11 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define ERROR_MSG		"Error\n"
 # define ASSET_HEIGHT	99
 # define ASSET_WIDTH	99
-
+# define DESTROY_NOTIFY	17
 # define ESC			53
 # define MOVE_UP 		13
 # define MOVE_DOWN 		1
@@ -91,3 +91,4 @@ void	fill_first_map(t_game *game);
 /* hooks */
 int		on_key_press(int key, t_game *game);
 void	make_a_move(t_game *game, int key);
+int	exit_hook(t_game *game);

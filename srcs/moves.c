@@ -6,13 +6,13 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 08:09:48 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/12 16:13:49 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/12 18:00:00 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-void	exit_hook(t_game *game)
+int		exit_hook(t_game *game)
 {
 	int i;
 
@@ -28,6 +28,7 @@ void	exit_hook(t_game *game)
 	mlx_destroy_image(game->mlx_instance, game->i_asset_player_over_exit.img);
 	mlx_destroy_window(game->mlx_instance, game->mlx_window);
 	exit(0);
+	return (1);
 }
 
 /* introduces new map letter, 'N', that stands for player being over the exit,
