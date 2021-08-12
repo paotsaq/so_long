@@ -6,7 +6,7 @@
 /*   By: apinto <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 16:44:23 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/11 02:02:41 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/12 07:35:20 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,21 @@ static int	xpm_to_image_wrapper(t_game *game, t_image *image, char *filename)
 
 int	load_textures(t_game *game)
 {
-	xpm_to_image_wrapper(game, &game->i_asset_floor, "./assets/asset_grass.xpm");
-	xpm_to_image_wrapper(game, &game->i_asset_exit, "./assets/asset_exit.xpm");
-	xpm_to_image_wrapper(game, &game->i_asset_coll, "./assets/asset_coll.xpm");
-	xpm_to_image_wrapper(game, &game->i_asset_wall, "./assets/asset_wall.xpm");
-	xpm_to_image_wrapper(game, &game->i_asset_player, "./assets/asset_boy.xpm");
-	if (!game->i_asset_floor.img || !game->i_asset_exit.img || !game->i_asset_coll.img
-			|| !game->i_asset_wall.img || !game->i_asset_player.img)
+	xpm_to_image_wrapper(game, &game->i_asset_floor,
+			"./assets/asset_grass.xpm");
+	xpm_to_image_wrapper(game, &game->i_asset_exit,
+			"./assets/asset_exit.xpm");
+	xpm_to_image_wrapper(game, &game->i_asset_coll,
+		   	"./assets/asset_coll.xpm");
+	xpm_to_image_wrapper(game, &game->i_asset_wall,
+		   	"./assets/asset_wall.xpm");
+	xpm_to_image_wrapper(game, &game->i_asset_player,
+		   	"./assets/asset_boy.xpm");
+	xpm_to_image_wrapper(game, &game->i_asset_player_over_exit,
+			"./assets/asset_boy_over_exit.xpm");
+	if (!game->i_asset_floor.img || !game->i_asset_exit.img ||
+			!game->i_asset_coll.img || !game->i_asset_wall.img ||
+			!game->i_asset_player.img || !game->i_asset_player_over_exit.img)
 		return (-1);
 	return (1);
 }

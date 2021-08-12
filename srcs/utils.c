@@ -6,7 +6,7 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 02:54:06 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/11 21:21:06 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/12 07:27:33 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	get_player_position(t_game *game)
 	}
 }
 
-int	game_finishes(t_game *game, int x, int y)
+int		game_finishes(t_game *game, int x, int y)
 {
 	if (game->map[y][x] == 'E' && game->collectible_count == 0)
 		return (1);

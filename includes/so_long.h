@@ -6,7 +6,7 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:19:35 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/11 22:15:14 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/12 07:35:42 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,12 @@ typedef struct 	s_game {
 	int			max_y;
 	int			player_x;
 	int			player_y;
-	t_image		*image_to_write;
+	int			new_x;
+	int			new_y;
 	t_image		i_asset_floor;
 	t_image		i_asset_wall;
 	t_image		i_asset_player;
+	t_image		i_asset_player_over_exit;
 	t_image		i_asset_coll;
 	t_image		i_asset_exit;
 }				t_game;
