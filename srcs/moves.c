@@ -12,9 +12,9 @@
 
 #include "../includes/so_long.h"
 
-int		exit_hook(t_game *game)
+int	exit_hook(t_game *game)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < game->max_y)
@@ -91,15 +91,15 @@ void	update_provisional_positions(t_game *game, int key)
 
 int	on_key_press(int key, t_game *game)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	x = game->player_x;
 	y = game->player_y;
 	if (key == ESC)
 		exit_hook(game);
-	else if (game->allow_movement && (key == MOVE_UP || key == MOVE_DOWN ||
-			key == MOVE_LEFT || key == MOVE_RIGHT))
+	else if (game->allow_movement && (key == MOVE_UP || key == MOVE_DOWN
+			|| key == MOVE_LEFT || key == MOVE_RIGHT))
 	{
 		update_provisional_positions(game, key);
 		if (legal_move(game, game->new_x, game->new_y))

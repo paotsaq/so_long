@@ -34,7 +34,7 @@ static void	init_game_variables(t_game *game)
 
 int	gets_map_fd(t_game *game, char *filename)
 {
-	int fd;
+	int	fd;
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
@@ -44,10 +44,10 @@ int	gets_map_fd(t_game *game, char *filename)
 
 int	main(int argc, char **argv)
 {
-	t_game game;
+	t_game	game;
 
 	if (argc != 2)
-		return error_and_free(&game, WRONG_ARGC, 0);
+		return (error_and_free(&game, WRONG_ARGC, 0));
 	init_game_variables(&game);
 	if (parser(&game, argv[1]) == -1)
 		return (-1);

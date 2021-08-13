@@ -19,7 +19,8 @@ static void	initialize_parse_variables(t_parse_info *info)
 	info->player_exists = 0;
 }
 
-static int	valid_line(t_game *game, t_parse_info *info, char *line, int first_or_last)
+static int	valid_line(t_game *game, t_parse_info *info,
+		char *line, int first_or_last)
 {
 	if ((int)ft_strlen(line) != game->max_x)
 		return (error_and_free(game, NOT_RECTANGLE, 1));
@@ -28,8 +29,8 @@ static int	valid_line(t_game *game, t_parse_info *info, char *line, int first_or
 		while (*line)
 			if (*line != '1')
 				return (error_and_free(game, BORDER_NOT_1, 1));
-			else
-				line++;
+		else
+			line++;
 	}
 	else
 	{
@@ -41,8 +42,8 @@ static int	valid_line(t_game *game, t_parse_info *info, char *line, int first_or
 				|| (*line == 'P' && info->player_exists++ < 0)
 				|| (*line == 'C' && info->collect_exists++ < 0))
 				return (error_and_free(game, MSSNG_EPC, 1));
-			else
-				line++;
+		else
+			line++;
 	}
 	return (1);
 }
@@ -77,9 +78,9 @@ static int	allocate_map_matrix(t_game *game, char *line)
  *		(-1) is returned
  * the buffer is freed afterwards,
  * because GNL will still alocate a null string. */
-int parser(t_game *game, char *filename)
+int	parser(t_game *game, char *filename)
 {
-	int 			fd;
+	int				fd;
 	char			*buffer;
 	t_parse_info	parse_info;
 
@@ -95,9 +96,9 @@ int parser(t_game *game, char *filename)
 			return (-1);
 	}
 	free(buffer);
-	if (parse_info.exit_exists == 0 ||
-		parse_info.player_exists != 1 ||
-		parse_info.collect_exists == 0)
+	if (parse_info.exit_exists == 0
+		|| parse_info.player_exists != 1
+		|| parse_info.collect_exists == 0)
 		return (error_and_free(game, MSSNG_EPC, 1));
 	update_map_information(game, 1);
 	return (1);

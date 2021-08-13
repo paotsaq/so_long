@@ -26,10 +26,10 @@ void	get_map_coordinates(int x, int y, t_map_coords *coords)
 
 void	fill_first_map(t_game *game)
 {
-	int row;
-	int column;
-	t_map_coords coords;
-	t_image	*asset;
+	int				row;
+	int				column;
+	t_map_coords	coords;
+	t_image			*asset;
 
 	column = -1;
 	while (++column < game->max_y)
@@ -55,8 +55,8 @@ void	fill_first_map(t_game *game)
 
 void	initialize_window_and_instance(t_game *game)
 {
-	int window_width;
-	int window_height;
+	int	window_width;
+	int	window_height;
 
 	window_width = game->max_x * ASSET_WIDTH;
 	window_height = game->max_y * ASSET_HEIGHT;
