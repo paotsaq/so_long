@@ -6,7 +6,7 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:17:18 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/12 20:11:57 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/16 12:27:14 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ int	parser(t_game *game, char *filename)
 	t_parse_info	parse_info;
 
 	fd = gets_map_fd(game, filename);
+	if (fd == -1)
+		return (-1);
 	initialize_parse_variables(&parse_info);
 	while (get_next_line(fd, &buffer) == 1)
 	{
