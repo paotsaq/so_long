@@ -6,7 +6,7 @@
 /*   By: apinto <apinto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:19:35 by apinto            #+#    #+#             */
-/*   Updated: 2021/08/12 19:38:00 by apinto           ###   ########.fr       */
+/*   Updated: 2021/08/16 11:59:19 by apinto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,3 +104,5 @@ void	fill_first_map(t_game *game);
 int		on_key_press(int key, t_game *game);
 void	make_a_move(t_game *game, int key);
 int		exit_hook(t_game *game);
+
+#endif

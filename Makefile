@@ -36,7 +36,5 @@ re: clean all
 
 fclean: clean
 	make fclean -C ./libft
-	rm -f $(OBJS)
 	rm -f libft.a
-	rm -f $(NAME)
 	rm -rf ./__.SYMDEF\ SORTED
